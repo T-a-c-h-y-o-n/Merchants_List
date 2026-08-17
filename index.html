@@ -299,6 +299,13 @@
   .final .btn-primary:hover{background:var(--stamp);border-color:var(--stamp);color:#fff}
   .final .fine{position:relative;font-family:var(--font-mono);font-size:12px;color:#8FA3B6;margin-top:4px}
 
+  /* ---------- SCROLL REVEAL ---------- */
+  .rv{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+  .rv.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .rv{opacity:1;transform:none;transition:none}
+  }
+
   footer{
     border-top:6px solid var(--carbon);background:var(--panel);
   }
@@ -370,7 +377,7 @@
         </ul>
       </div>
 
-      <div class="inspection" role="img" aria-label="Sample of a verified supplier record">
+      <div class="inspection rv" role="img" aria-label="Sample of a verified supplier record">
         <div class="cap"><b>Inspection card</b><span>file·#0137</span></div>
         <table>
           <tr><td class="k">Company</td><td class="v">100% PURE</td></tr>
@@ -395,15 +402,15 @@
   <span>file ML-1000 · July 2026</span>
 </div>
     <div class="wrap">
-      <div class="strip">
-        <div class="ticket"><div class="n">2,403 <small>→ 2,238</small></div><div class="l">leads gathered → <b>suppliers kept</b> · 165 dupes removed</div></div>
-        <div class="ticket"><div class="n">1,792</div><div class="l"><b>live</b>&nbsp;domains · <b>80%</b> of all records</div></div>
-        <div class="ticket"><div class="n">1,093</div><div class="l"><b class="t">mx-valid</b>&nbsp;emails · <b>96%</b> of emails included</div></div>
-        <div class="ticket"><div class="n">1,766</div><div class="l"><b>phone numbers</b> recorded</div></div>
-        <div class="ticket"><div class="n">678</div><div class="l"><b>LinkedIn</b> company pages</div></div>
-        <div class="ticket"><div class="n">256</div><div class="l">companies with <b>100+ staff</b></div></div>
-        <div class="ticket"><div class="n">228</div><div class="l">report ≥ <b>$50M</b> revenue</div></div>
-        <div class="ticket"><div class="n">33</div><div class="l"><b>standardized</b> industries</div></div>
+      <div class="strip rv">
+        <div class="ticket"><div class="n"><span class="c" data-n="2403">2,403</span> <small>→ 2,238</small></div><div class="l">leads gathered → <b>suppliers kept</b> · 165 dupes removed</div></div>
+        <div class="ticket"><div class="n"><span class="c" data-n="1792">1,792</span></div><div class="l"><b>live</b>&nbsp;domains · <b>80%</b> of all records</div></div>
+        <div class="ticket"><div class="n"><span class="c" data-n="1093">1,093</span></div><div class="l"><b class="t">mx-valid</b>&nbsp;emails · <b>96%</b> of emails included</div></div>
+        <div class="ticket"><div class="n"><span class="c" data-n="1766">1,766</span></div><div class="l"><b>phone numbers</b> recorded</div></div>
+        <div class="ticket"><div class="n"><span class="c" data-n="678">678</span></div><div class="l"><b>LinkedIn</b> company pages</div></div>
+        <div class="ticket"><div class="n"><span class="c" data-n="256">256</span></div><div class="l">companies with <b>100+ staff</b></div></div>
+        <div class="ticket"><div class="n"><span class="c" data-n="228">228</span></div><div class="l">report ≥ <b>$50M</b> revenue</div></div>
+        <div class="ticket"><div class="n"><span class="c" data-n="33">33</span></div><div class="l"><b>standardized</b> industries</div></div>
       </div>
     </div>
     <div class="tally-foot wrap">Every figure above is counted from current file ML-1000 (CSV), July 2026.</div>
@@ -485,8 +492,8 @@
         <p class="sub">2,238 companies, 28 columns in Premium. Same data, three levels of gear for outreach.</p>
       </div>
 
-      <div class="grid">
-        <div class="tiers">
+<div class="grid">
+    <div class="tiers rv">
           <div class="tier">
             <h4>Main list</h4>
             <p class="tbl-meta">ML-1000 · CSV · 21 columns</p>
@@ -540,8 +547,8 @@
             <h4>Niche one-industry lists</h4>
             <p>pick one sector, pay less, skip the rest</p>
           </div>
-          <div class="tablewrap">
-            <table class="ledger">
+<div class="tablewrap rv">
+    <table class="ledger">
               <thead>
                 <tr><th>Industry</th><th>Companies</th><th>Emails</th><th>Phones</th><th>Price</th></tr>
               </thead>
@@ -602,7 +609,7 @@
         <h3 id="faq-h">Questions, answered flat</h3>
         <p class="sub">No fluff sheets, no "trust me" — the passes are above, the count is on the receipt.</p>
       </div>
-      <div class="faq">
+      <div class="faq rv">
         <details>
           <summary><span class="q">Q.1</span><span>Is this source-scraped data?</span></summary>
           <p><b>No.</b> Collected from public business records and directories for U.S. operations, then deduped, verified, and scored in July 2026. A scrape-and-dump bot does not do dedup, MX, or scoring.</p>
@@ -637,7 +644,7 @@
 
   <!-- FINAL CTA -->
   <section class="wrap" aria-labelledby="final-h">
-    <div class="final">
+    <div class="final rv">
       <h3 id="final-h">Your week of dead leads ends here.</h3>
       <p class="sub">2,238 records · verified July 2026 · one-time price</p>
       <div class="final-cta">
@@ -656,6 +663,50 @@
     <span class="r">© 2026 · verified 2026-07 · <a href="mailto:hello@merchantslist.example">contact</a></span>
   </div>
 </footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Tally count-up */
+  var counters = document.querySelectorAll(".ticket .c");
+  if (counters.length && !reduce) {
+    var fmt = new Intl.NumberFormat("en-US");
+    function run(el){
+      var target = parseInt(el.getAttribute("data-n"), 10);
+      var dur = 1100, t0 = null;
+      function frame(ts){
+        if (!t0) t0 = ts;
+        var p = Math.min(1, (ts - t0) / dur);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = fmt.format(Math.round(target * eased));
+        if (p < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ run(e.target); io.unobserve(e.target); }
+      });
+    }, {threshold: .4});
+    counters.forEach(function(c){ io.observe(c); });
+  }
+
+  /* Section reveals */
+  var reveals = document.querySelectorAll(".rv");
+  if (reveals.length && !reduce && "IntersectionObserver" in window){
+    var rv = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add("in"); rv.unobserve(e.target); }
+      });
+    }, {threshold: .12, rootMargin: "0px 0px -8% 0px"});
+    reveals.forEach(function(el){ rv.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add("in"); });
+  }
+})();
+</script>
 
 </body>
 </html>
