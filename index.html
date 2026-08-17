@@ -251,6 +251,18 @@
   table.ledger td .price{color:var(--stamp);font-weight:600}
   table.ledger tr:last-child td{border-bottom:3px solid var(--carbon)}
 
+  /* niche rows: clickable vs coming soon */
+  table.ledger tr.tap{cursor:pointer}
+  table.ledger tr.tap td{transition:background .15s}
+  table.ledger tr.tap:hover td{background:rgba(166,47,40,.08)}
+  table.ledger tr.tap:hover td b{text-decoration:underline;text-underline-offset:3px}
+  table.ledger td .soon{
+    font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--hash);border:1px dashed var(--rule-strong);border-radius:var(--r-tag);
+    padding:3px 8px 2px;white-space:nowrap;
+  }
+  table.ledger td .soon:hover{color:var(--slate);border-color:var(--slate)}
+
   /* ---------- COMPARISON ---------- */
   .compare{padding-bottom:52px}
   .compare .note{
@@ -553,19 +565,19 @@
                 <tr><th>Industry</th><th>Companies</th><th>Emails</th><th>Phones</th><th>Price</th></tr>
               </thead>
               <tbody>
-                <tr><td><b>Retail &amp; E-commerce</b></td><td>393</td><td>207</td><td>324</td><td class="price">$27</td></tr>
-                <tr><td><b>Wholesale &amp; Distribution</b></td><td>347</td><td>187</td><td>259</td><td class="price">$27</td></tr>
-                <tr><td><b>Food &amp; Beverage</b></td><td>325</td><td>158</td><td>262</td><td class="price"><a href="https://tachyon80.gumroad.com/l/ocecd">$27</a></td></tr>
-                <tr><td><b>Beauty &amp; Cosmetics</b></td><td>181</td><td>94</td><td>141</td><td class="price"><a href="https://tachyon80.gumroad.com/l/ubhqlz">$19</a></td></tr>
-                <tr><td><b>Sports &amp; Outdoor</b></td><td>174</td><td>85</td><td>139</td><td class="price">$19</td></tr>
-                <tr><td><b>Electronics &amp; Tech</b></td><td>150</td><td>74</td><td>111</td><td class="price">$19</td></tr>
-                <tr><td><b>Apparel &amp; Fashion</b></td><td>145</td><td>72</td><td>122</td><td class="price">$14</td></tr>
-                <tr><td><b>Pet Products</b></td><td>120</td><td>65</td><td>92</td><td class="price"><a href="https://tachyon80.gumroad.com/l/rfnlgg">$14</a></td></tr>
-                <tr><td><b>Industrial &amp; Manufacturing</b></td><td>84</td><td>44</td><td>66</td><td class="price">$14</td></tr>
-                <tr><td><b>Toys &amp; Games</b></td><td>50</td><td>24</td><td>36</td><td class="price">$14</td></tr>
-                <tr><td><b>Health &amp; Medical</b></td><td>46</td><td>27</td><td>37</td><td class="price">$9</td></tr>
-                <tr><td><b>Automotive Parts</b></td><td>43</td><td>21</td><td>36</td><td class="price">$9</td></tr>
-                <tr><td><b>Home &amp; Furniture</b></td><td>23</td><td>8</td><td>16</td><td class="price">$9</td></tr>
+                <tr><td><b>Retail &amp; E-commerce</b></td><td>393</td><td>207</td><td>324</td><td class="price"><span class="soon">coming soon</span></td></tr>
+                <tr><td><b>Wholesale &amp; Distribution</b></td><td>347</td><td>187</td><td>259</td><td class="price"><span class="soon">coming soon</span></td></tr>
+                <tr class="tap" data-href="https://tachyon80.gumroad.com/l/ocecd"><td><b>Food &amp; Beverage</b></td><td>325</td><td>158</td><td>262</td><td class="price">$27</td></tr>
+                <tr class="tap" data-href="https://tachyon80.gumroad.com/l/ubhqlz"><td><b>Beauty &amp; Cosmetics</b></td><td>181</td><td>94</td><td>141</td><td class="price">$19</td></tr>
+                <tr><td><b>Sports &amp; Outdoor</b></td><td>174</td><td>85</td><td>139</td><td class="price"><span class="soon">coming soon</span></td></tr>
+                <tr><td><b>Electronics &amp; Tech</b></td><td>150</td><td>74</td><td>111</td><td class="price"><span class="soon">coming soon</span></td></tr>
+                <tr><td><b>Apparel &amp; Fashion</b></td><td>145</td><td>72</td><td>122</td><td class="price"><span class="soon">coming soon</span></td></tr>
+                <tr class="tap" data-href="https://tachyon80.gumroad.com/l/rfnlgg"><td><b>Pet Products</b></td><td>120</td><td>65</td><td>92</td><td class="price">$14</td></tr>
+                <tr><td><b>Industrial &amp; Manufacturing</b></td><td>84</td><td>44</td><td>66</td><td class="price"><span class="soon">coming soon</span></td></tr>
+                <tr><td><b>Toys &amp; Games</b></td><td>50</td><td>24</td><td>36</td><td class="price"><span class="soon">coming soon</span></td></tr>
+                <tr><td><b>Health &amp; Medical</b></td><td>46</td><td>27</td><td>37</td><td class="price"><span class="soon">coming soon</span></td></tr>
+                <tr><td><b>Automotive Parts</b></td><td>43</td><td>21</td><td>36</td><td class="price"><span class="soon">coming soon</span></td></tr>
+                <tr><td><b>Home &amp; Furniture</b></td><td>23</td><td>8</td><td>16</td><td class="price"><span class="soon">coming soon</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -692,6 +704,24 @@
     }, {threshold: .4});
     counters.forEach(function(c){ io.observe(c); });
   }
+
+  /* Clickable niche rows */
+  var tapRows = document.querySelectorAll("tr.tap");
+  tapRows.forEach(function(tr){
+    tr.addEventListener("click", function(){
+      var href = tr.getAttribute("data-href");
+      if (href) window.location.href = href;
+    });
+    tr.addEventListener("keydown", function(e){
+      if (e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        var href = tr.getAttribute("data-href");
+        if (href) window.location.href = href;
+      }
+    });
+    tr.setAttribute("role", "link");
+    tr.setAttribute("tabindex", "0");
+  });
 
   /* Section reveals */
   var reveals = document.querySelectorAll(".rv");
