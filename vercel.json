@@ -1,4 +1,11 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/mlist/:path*",
+      "destination": "https://merchants.ai2eo.com/:path*",
+      "permanent": true
+    }
+  ]
 }
