@@ -13,26 +13,30 @@ No build step, no dependencies — plain HTML/CSS/JS.
 
 ## Run locally
 
-Serve the folder (relative asset paths):
+Serve the folder (paths are absolute from root, so serve the folder itself):
 
 ```bash
 python3 -m http.server 8000
+# then open http://127.0.0.1:8000/
 ```
 
 ## Deploy
 
-Works as static hosting on any of these — no config needed:
+Live at **https://merchants.ai2eo.com/** (Vercel, auto-deploy from `main`).
 
-- **Vercel** — `vercel deploy` or connect the repo in the dashboard
+- **Vercel** — `vercel.json` sets `cleanUrls:true, trailingSlash:false`.
+  All asset/page links are absolute-from-root (`/assets/...`, `/retail-suppliers.html`)
+  so pages keep working under clean URLs (`/retail-suppliers/`).
 - **Netlify** — drag-and-drop the file, or connect the repo
-- **GitHub Pages** — Settings → Pages → deploy from branch, rename `landing_page.html` to `index.html` first
+- **GitHub Pages** — Settings → Pages → deploy from branch
 
 ## Before going live
 
-Replace these placeholders:
+Already done (Aug 2026), kept here for reference:
 
-- [ ] All `href="#"` buy buttons (7 total) → real Gumroad checkout URLs
-- [ ] `hello@merchantslist.example` in the footer → real contact email
+- [x] All `href="#"` buy buttons → real Gumroad checkout URLs
+- [x] Footer contact email → `info@ai2eo.com`
+- [x] Canonical/OG/sitemap → `https://merchants.ai2eo.com/`
 - [ ] Confirm the verification date ("July 2026") still matches the current data file if you update `merchants_enriched.csv` later
 
 ## Stack
