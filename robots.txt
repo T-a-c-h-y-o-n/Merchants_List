@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://merchants.ai2eo.com/sitemap.xml
