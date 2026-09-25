@@ -81,6 +81,10 @@
   .seo-nav a:hover{color:var(--stamp)}
   .seo-nav a.cur{color:var(--stamp);text-decoration:underline;text-underline-offset:3px;pointer-events:none;cursor:default}
   .seo-nav .nav-ctl{display:flex;flex-wrap:wrap;gap:4px 18px;align-items:center}
+  a.nav-recall{border:1px solid var(--stamp);color:var(--stamp);padding:4px 10px;border-radius:var(--r-tag);background:var(--stamp-soft);white-space:nowrap;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none}
+  a.nav-recall:hover{background:var(--stamp);color:#fff}
+  a.nav-recall.cur{background:var(--stamp);color:#fff;pointer-events:none;cursor:default;text-decoration:none}
+  @media (min-width:1216px){.seo-nav a.nav-recall{margin-left:auto;margin-right:184px}}
   .seo-nav .nav-label{color:var(--hash);text-decoration:none}
   .seo-nav a.nav-label:hover{color:var(--stamp)}
 
